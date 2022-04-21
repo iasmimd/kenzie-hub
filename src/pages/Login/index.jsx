@@ -23,6 +23,9 @@ const Login = () => {
     api
       .post("/sessions", data)
       .then((res) => {
+        const { token, user } = res.data;
+        localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
+        localStorage.setItem("@KenzieHub:user", JSON.stringify(user));
         console.log(res);
       })
       .catch((err) => {
@@ -32,20 +35,20 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Login</h1>
+      <h1>Login</h1>
       <input
         name="email"
         {...register("email")}
         placeholder="Email"
         {...errors.email?.message}
-      ></input>
+      />
       <input
         name="password"
         {...register("password")}
         placeholder="Senha"
         type="password"
         {...errors.password?.message}
-      ></input>
+      />
       <button type="submit">Entrar</button>
       <span>Ainda não possui uma conta?</span>
       <button>Cadastre-se</button>

@@ -8,4 +8,8 @@ export default createGlobalStyle`
         outline: 0;
         list-style: none;
     }
+
+    body{
+        background-color: #fff;
+    }
 `
