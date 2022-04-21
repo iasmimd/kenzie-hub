@@ -1,10 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from './styles/global'
+import Login from './pages/Login';
 
 function App() {
   return (
-<>
-</>
+    <>
+      <GlobalStyle />
+      <Login />
+    </>
   );
 }
 
