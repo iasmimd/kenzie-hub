@@ -1,9 +1,10 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import api from "../../services/api";
 
-const Signup = () => {
+const Signup = ({autentication}) => {
   const schema = yup.object().shape({});
 
   const {
@@ -12,16 +13,23 @@ const Signup = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const history = useHistory();
+
   const onSubmit = (data) => {
     api
       .post("/users", data)
       .then((res) => {
         console.log(res);
+        return history.push("/");
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  if (autentication) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>

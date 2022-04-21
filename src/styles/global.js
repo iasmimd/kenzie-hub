@@ -7,6 +7,8 @@ export default createGlobalStyle`
         box-sizing: border-box;
         outline: 0;
         list-style: none;
+        text-decoration: none;
+        color: inherit;
     }
 
     body{
