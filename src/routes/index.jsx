@@ -8,7 +8,7 @@ const Routes = () => {
   const [autentication, setAutentication] = useState(false);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@Doit:token"));
+    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
     if (token) {
       return setAutentication(true);
     }
@@ -23,7 +23,7 @@ const Routes = () => {
         <Signup autentication={autentication}/>
       </Route>
       <Route path="/dashboard">
-        <Dashboard autentication={autentication}/>
+        <Dashboard autentication={autentication} setAutentication={setAutentication}/>
       </Route>
     </Switch>
   );

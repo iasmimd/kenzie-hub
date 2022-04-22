@@ -12,6 +12,16 @@ export default createGlobalStyle`
     }
 
     body{
-        background-color: #fff;
+        background:#121214;
+        color: #F8F9FA;
+        font-family: "Inter", sans-serif;
+    }
+
+    button{
+        cursor: pointer;
+    }
+
+    .customModal{
+        background-color: #212529;
     }
 `

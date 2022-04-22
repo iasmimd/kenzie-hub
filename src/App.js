@@ -1,12 +1,15 @@
 import GlobalStyle from './styles/global'
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Dashboard from './pages/Dashboard';
+import toast, { Toaster } from 'react-hot-toast'
 import Routes from './routes';
 
 function App() {
   return (
     <>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{ className: "", style: {} }}
+      />
       <GlobalStyle />
       <Routes />
     </>
