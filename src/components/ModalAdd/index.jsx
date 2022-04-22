@@ -7,8 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import Button from "../Button";
 import api from "../../services/api";
+import Select from "../Select";
+import toast, { Toaster } from "react-hot-toast";
+import { Content } from "../ModalTech/styles";
 
-const ModalTech = ({ onOpenModal, onCloseModal }) => {
+const ModalAdd = ({ onOpenModal, onCloseModal }) => {
   const [tech, setTech] = useState([]);
 
   const schema = yup.object().shape({
@@ -36,12 +39,16 @@ const ModalTech = ({ onOpenModal, onCloseModal }) => {
         localStorage.setItem(
           "@KenzieHub:tech",
           JSON.stringify([...tech, res.data])
-        );
+        )
+          toast.success("Adicionado com sucesso")
       })
       .catch((err) => {
+        toast.error("Algo deu errado ):")
         console.log(err);
       });
-  };
+  };  
+
+  const selects = ["Iniciante", "Intermediário", "Avançado"];
 
   return (
     <Modal
@@ -53,6 +60,7 @@ const ModalTech = ({ onOpenModal, onCloseModal }) => {
         modal: "customModal",
       }}
     >
+      <Content>
       <header>
         <h4>Cadastrar tecnologia</h4>
       </header>
@@ -63,16 +71,17 @@ const ModalTech = ({ onOpenModal, onCloseModal }) => {
           label="Nome"
           error={errors.title?.message}
         />
-        <Input
+          <label>Nível</label>
+        <Select
           register={register}
           name="status"
-          label="Selecionar status"
-          error={errors.status?.message}
-        />
-        <Button type="submit" onClick={() => onCloseModal(false)}>Cadastrar tecnologia</Button>
+          options={selects}
+        ></Select>
+        <Button type="submit">Cadastrar tecnologia</Button>
       </form>
+      </Content>
     </Modal>
   );
 };
 
-export default ModalTech;
+export default ModalAdd;

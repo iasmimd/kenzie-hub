@@ -39,7 +39,7 @@ export const Content = styled.div`
         height: 90%;
         width: 90%;
         padding: 5px;
-        max-width: 425px;
+        max-width: 800px;
     }
 
     h1{
@@ -62,5 +62,10 @@ export const Content = styled.div`
 
     button{
         margin-top:10px;
+    }
+
+    label{
+        font-size: 12px;
+        margin-bottom: 2px;
     }
 `

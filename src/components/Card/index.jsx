@@ -6,7 +6,7 @@ const Card = ({ getTech, openTech }) => {
   return (
     <>
       {getTech.length > 0 ? (
-        <Container>
+        <Container onClick={openTech}>
           {getTech.map(({ title, status, id }) => (
             <Content key={id}>
               <h3>{title}</h3>

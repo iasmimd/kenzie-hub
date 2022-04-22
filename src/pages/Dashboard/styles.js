@@ -26,7 +26,7 @@ export const Content = styled.div`
     flex-direction: column;
     height: 750px;
     width: 90%;
-    max-width: 420px;    
+    max-width: 800px;    
 
     h1{
         font-size: 18px;

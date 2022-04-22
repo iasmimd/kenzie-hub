@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
+import toast, { Toaster } from "react-hot-toast";
 import api from "../../services/api";
 import Input from "../../components/Input";
 import Button from "../../components/Button"
@@ -34,9 +35,11 @@ const Login = ({ autentication, setAutentication }) => {
         localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
         localStorage.setItem("@KenzieHub:user", JSON.stringify(user));
         setAutentication(true);
+        toast.success("Logado com sucesso (:")
         return history.push("/dashboard");
       })
       .catch((err) => {
+        toast.error("Algo deu errado ):")
         console.log(err);
       });
   };
@@ -47,7 +50,7 @@ const Login = ({ autentication, setAutentication }) => {
 
   return (
     <Container>
-        <img src={Logo}/>
+        <img src={Logo} alt="logo"/>
       <Content>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Login</h1>

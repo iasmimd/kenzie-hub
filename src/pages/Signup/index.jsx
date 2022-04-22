@@ -4,12 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import api from "../../services/api";
 import toast, { Toaster } from "react-hot-toast";
-import { FiUser, FiMail, FiLock, FiBookmark, FiAtSign, FiSmile } from "react-icons/fi";
+import { FiUser, FiMail, FiLock, FiAtSign, FiSmile } from "react-icons/fi";
 import { Container, Content, Top } from "./styles";
-import Logo from "../../assets/logo.svg"
+import Logo from "../../assets/logo.svg";
 import Input from "../../components/Input";
-import Button from "../../components/Button"
+import Button from "../../components/Button";
 import ButtonLogout from "../../components/ButtonLogout";
+import Select from "../../components/Select";
 
 const Signup = ({ autentication }) => {
   const schema = yup.object().shape({
@@ -50,6 +51,13 @@ const Signup = ({ autentication }) => {
       });
   };
 
+  const selects = [
+     "Primeiro módulo" ,
+     "Segundo módulo",
+     "Terceiro módulo",
+     "Quarto módulo"
+  ];
+
   if (autentication) {
     return <Redirect to="/dashboard" />;
   }
@@ -57,8 +65,10 @@ const Signup = ({ autentication }) => {
   return (
     <Container>
       <Top>
-        <img src={Logo} alt="logo"/>
-        <ButtonLogout><Link to="/">Voltar</Link></ButtonLogout>
+        <img src={Logo} alt="logo" />
+        <ButtonLogout>
+          <Link to="/">Voltar</Link>
+        </ButtonLogout>
       </Top>
       <Content>
         <h1>Crie sua conta</h1>
@@ -98,15 +108,8 @@ const Signup = ({ autentication }) => {
             type="password"
             error={errors.confirmPassword?.message}
           />
-          <Input
-            name="course_module"
-            register={register}
-            icon={FiBookmark}
-            label="Selecionar módulo"
-            placeholder="Senha"
-            type="text"
-            error={errors.password?.message}
-          />
+          <label>Selecionar módulo</label>
+          <Select register={register} name="course_module" options={selects}></Select>
           <Input
             name="bio"
             register={register}

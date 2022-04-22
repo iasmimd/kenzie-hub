@@ -1,13 +1,11 @@
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import api from "../../services/api";
 import { Container, Header, Content, ContentUser, ContentAdd } from "./styles";
 import Logo from "../../assets/logo.svg";
 import ButtonLogout from "../../components/ButtonLogout";
 import React, { useState, useEffect } from "react";
-import ModalTech from "../../components/Modal";
+import ModalAdd from "../../components/ModalAdd";
+import ModalTech from "../../components/ModalTech";
 import Card from "../../components/Card";
 
 const Dashboard = ({ autentication, setAutentication }) => {
@@ -36,6 +34,16 @@ const Dashboard = ({ autentication, setAutentication }) => {
     localStorage.clear();
     return setAutentication(false);
   };
+
+  const [openTech, setOpenTech] = useState(false);
+
+  const onOpenTech = () => {
+    setOpenTech(true);
+  };
+
+  const onCloseTech = () => {
+    setOpenTech(false);
+  }
 
   if (!autentication) {
     return <Redirect to="/" />;
@@ -75,12 +83,13 @@ const Dashboard = ({ autentication, setAutentication }) => {
             </span>
           </button>
           {open && (
-            <ModalTech onOpenModal={onOpenModal} onCloseModal={onCloseModal} />
+            <ModalAdd onOpenModal={onOpenModal} onCloseModal={onCloseModal} />
+          )}
+          {openTech && (
+            <ModalTech onOpenModal={onOpenTech} onCloseModal={onCloseTech} />
           )}
         </ContentAdd>
-        <Card
-          getTech={getTech}
-        />
+        <Card getTech={getTech} openTech={onOpenTech} />
       </Content>
     </Container>
   );

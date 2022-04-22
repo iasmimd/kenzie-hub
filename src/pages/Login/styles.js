@@ -23,7 +23,6 @@ export const Content = styled.div`
     border-radius: 5px;
     height: 450px;
     width: 90%;
-    max-width: 500px;
     max-width: 420px;    
 
     form{
