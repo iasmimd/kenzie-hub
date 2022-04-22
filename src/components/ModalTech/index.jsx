@@ -13,21 +13,12 @@ const ModalTech = ({ onOpenModal, onCloseModal }) => {
 
   const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
 
-  const [getTech, setGetTech] = useState(
-    localStorage.getItem("@KenzieHub:tech")
-      ? JSON.parse(localStorage.getItem("@KenzieHub:tech"))
-      : ""
-  );
-
-  console.log(getTech)
+  const user = JSON.parse(localStorage.getItem("@KenzieHub:user"));
 
   const onSubmit = (data) => {
-    const { techs } = data;
-
-    const id = getTech.find(({ id }) => id === techs.id);
 
     api
-      .put(`/users/techs/${id}`, data, {
+      .put(`/users/techs/${data.id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -57,11 +48,7 @@ const ModalTech = ({ onOpenModal, onCloseModal }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input register={register} name="title" label="Nome" />
           <label>Nível</label>
-          <Select
-            register={register}
-            name="course_module"
-            options={selects}
-          ></Select>
+          <Select register={register} name="status" options={selects}></Select>
           <div>
             <Button type="submit">Salvar alterações</Button>
             <Button graySchema type="submit" onClick={deleteTech}>
