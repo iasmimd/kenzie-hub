@@ -11,7 +11,7 @@ import Select from "../Select";
 import toast, { Toaster } from "react-hot-toast";
 import { Content } from "../ModalTech/styles";
 
-const ModalAdd = ({ onOpenModal, onCloseModal}) => {
+const ModalAdd = ({ onOpenModal, onCloseModal, catchTech }) => {
   const [tech, setTech] = useState([]);
 
   const schema = yup.object().shape({
@@ -35,14 +35,15 @@ const ModalAdd = ({ onOpenModal, onCloseModal}) => {
         },
       })
       .then((res) => {
+        catchTech()
         setTech([...tech, res.data]);
-          toast.success("Adicionado com sucesso")
+        toast.success("Adicionado com sucesso");
       })
       .catch((err) => {
-        toast.error("Algo deu errado ):")
+        toast.error("Algo deu errado ):");
         console.log(err);
       });
-  };  
+  };
 
   const selects = ["Iniciante", "Intermediário", "Avançado"];
 
@@ -57,24 +58,20 @@ const ModalAdd = ({ onOpenModal, onCloseModal}) => {
       }}
     >
       <Content>
-      <header>
-        <h4>Cadastrar tecnologia</h4>
-      </header>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          register={register}
-          name="title"
-          label="Nome"
-          error={errors.title?.message}
-        />
+        <header>
+          <h4>Cadastrar tecnologia</h4>
+        </header>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            register={register}
+            name="title"
+            label="Nome"
+            error={errors.title?.message}
+          />
           <label>Nível</label>
-        <Select
-          register={register}
-          name="status"
-          options={selects}
-        ></Select>
-        <Button type="submit">Cadastrar tecnologia</Button>
-      </form>
+          <Select register={register} name="status" options={selects}></Select>
+          <Button type="submit">Cadastrar tecnologia</Button>
+        </form>
       </Content>
     </Modal>
   );

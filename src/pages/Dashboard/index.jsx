@@ -48,6 +48,10 @@ const Dashboard = ({ autentication, setAutentication }) => {
     setOpenTech(false);
   };
 
+  const addTech = () => {
+    return <Card getTech={getTech} openTech={onOpenTech} setId={setId} setTitle={setTitle}/>
+  }
+
   if (!autentication) {
     return <Redirect to="/" />;
   }
@@ -86,13 +90,13 @@ const Dashboard = ({ autentication, setAutentication }) => {
             </span>
           </button>
           {open && (
-            <ModalAdd onOpenModal={onOpenModal} onCloseModal={onCloseModal}/>
+            <ModalAdd onOpenModal={onOpenModal} onCloseModal={onCloseModal} catchTech={catchTech}/>
           )}
           {openTech && (
             <ModalTech onOpenModal={onOpenTech} onCloseModal={onCloseTech} id={id} catchTech={catchTech} title={title} setOpenTech={setOpenTech}/>
           )}
         </ContentAdd>
-        <Card getTech={getTech} openTech={onOpenTech} setId={setId} setTitle={setTitle}/>
+        {addTech()}
       </Content>
     </Container>
   );
