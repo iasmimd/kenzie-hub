@@ -1,9 +1,9 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import api from "../../services/api";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { FiUser, FiMail, FiLock, FiAtSign, FiSmile } from "react-icons/fi";
 import { Container, Content, Top } from "./styles";
 import Logo from "../../assets/logo.svg";
@@ -40,22 +40,20 @@ const Signup = ({ autentication }) => {
   const onSubmit = (data) => {
     api
       .post("/users", data)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         toast.success("Conta criada com sucesso!");
         return history.push("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         toast.error("Ops! Algo deu errado");
       });
   };
 
   const selects = [
-     "Primeiro módulo" ,
-     "Segundo módulo",
-     "Terceiro módulo",
-     "Quarto módulo"
+    "Primeiro módulo",
+    "Segundo módulo",
+    "Terceiro módulo",
+    "Quarto módulo",
   ];
 
   if (autentication) {
@@ -66,9 +64,7 @@ const Signup = ({ autentication }) => {
     <Container>
       <Top>
         <img src={Logo} alt="logo" />
-        <ButtonLogout>
-          <Link to="/">Voltar</Link>
-        </ButtonLogout>
+        <ButtonLogout onClick={() => history.push("/")}>Voltar</ButtonLogout>
       </Top>
       <Content>
         <h1>Crie sua conta</h1>
@@ -109,7 +105,11 @@ const Signup = ({ autentication }) => {
             error={errors.confirmPassword?.message}
           />
           <label>Selecionar módulo</label>
-          <Select register={register} name="course_module" options={selects}></Select>
+          <Select
+            register={register}
+            name="course_module"
+            options={selects}
+          ></Select>
           <Input
             name="bio"
             register={register}

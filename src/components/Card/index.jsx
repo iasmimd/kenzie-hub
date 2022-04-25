@@ -1,22 +1,30 @@
 import { Container, Content } from "./styles";
 
-const Card = ({ getTech, openTech }) => {
-
-
+const Card = ({ getTech, openTech, setId, setTitle }) => {
   return (
     <>
       {getTech.length > 0 ? (
-        <Container onClick={openTech}>
-          {getTech.map(({ title, status, id }) => (
-            <Content key={id}>
-              <h3>{title}</h3>
-              <span>{status}</span>
-            </Content>
+        <>
+          {getTech.map((tech) => (
+            <Container
+            key={tech.id}
+              onClick={() => {
+                openTech()
+                setId(tech.id)
+                setTitle(tech.title)
+              }}
+            >
+              <Content 
+              >
+                <h3>{tech.title}</h3>
+                <span>{tech.status}</span>
+              </Content>
+            </Container>
           ))}
-        </Container>
+        </>
       ) : (
         <Container>
-        <h1>Adicione uma tecnologia!</h1>
+          <h1>Ainda não possui tecnologias</h1>
         </Container>
       )}
     </>

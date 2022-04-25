@@ -11,11 +11,11 @@ import Card from "../../components/Card";
 const Dashboard = ({ autentication, setAutentication }) => {
   const user = JSON.parse(localStorage.getItem("@KenzieHub:user"));
 
-  const [getTech, setGetTech] = useState(
-    localStorage.getItem("@KenzieHub:tech")
-      ? JSON.parse(localStorage.getItem("@KenzieHub:tech"))
-      : ""
-  );
+  const [id, setId] = useState("")
+
+  const [title, setTitle] = useState("")
+
+  const [getTech, setGetTech] = useState([]);
 
   const catchTech = () => {
     api.get(`/users/${user.id}`).then((res) => setGetTech(res.data.techs));
@@ -23,15 +23,18 @@ const Dashboard = ({ autentication, setAutentication }) => {
 
   useEffect(() => {
     catchTech();
-  }, [getTech]);
+  }, []);
 
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+  const history = useHistory()
+
   const logout = () => {
     localStorage.clear();
+    history.push("/")
     return setAutentication(false);
   };
 
@@ -43,7 +46,7 @@ const Dashboard = ({ autentication, setAutentication }) => {
 
   const onCloseTech = () => {
     setOpenTech(false);
-  }
+  };
 
   if (!autentication) {
     return <Redirect to="/" />;
@@ -55,7 +58,7 @@ const Dashboard = ({ autentication, setAutentication }) => {
         <Header>
           <img src={Logo} alt="logo" />
           <ButtonLogout onClick={logout}>
-            <Link to="/">Sair</Link>
+           Sair
           </ButtonLogout>
         </Header>
         <hr />
@@ -83,13 +86,13 @@ const Dashboard = ({ autentication, setAutentication }) => {
             </span>
           </button>
           {open && (
-            <ModalAdd onOpenModal={onOpenModal} onCloseModal={onCloseModal} />
+            <ModalAdd onOpenModal={onOpenModal} onCloseModal={onCloseModal}/>
           )}
           {openTech && (
-            <ModalTech onOpenModal={onOpenTech} onCloseModal={onCloseTech} />
+            <ModalTech onOpenModal={onOpenTech} onCloseModal={onCloseTech} id={id} catchTech={catchTech} title={title} setOpenTech={setOpenTech}/>
           )}
         </ContentAdd>
-        <Card getTech={getTech} openTech={onOpenTech} />
+        <Card getTech={getTech} openTech={onOpenTech} setId={setId} setTitle={setTitle}/>
       </Content>
     </Container>
   );

@@ -6,4 +6,9 @@ export const Container = styled.button`
      height: 25px;
      border-style: none;
      border-radius: 4px;
+     transition: 0.5s;
+
+     :hover{
+        border: 2px solid #ffffff;
+    }
 `

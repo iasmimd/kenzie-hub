@@ -1,9 +1,9 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import {Redirect, useHistory } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import api from "../../services/api";
 import Input from "../../components/Input";
 import Button from "../../components/Button"
@@ -40,7 +40,6 @@ const Login = ({ autentication, setAutentication }) => {
       })
       .catch((err) => {
         toast.error("Algo deu errado ):")
-        console.log(err);
       });
   };
 
@@ -73,9 +72,9 @@ const Login = ({ autentication, setAutentication }) => {
           />
           <Button type="submit" graySchema>Entrar</Button>
           <span>Ainda não possui uma conta?</span>
-          <Button>
+          <Button type="button" onClick={() => history.push("/signup")}>
             {" "}
-            <Link to="/signup">Cadastre-se</Link>
+           Cadastre-se
           </Button>
         </form>
       </Content>

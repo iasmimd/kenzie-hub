@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -25,6 +25,7 @@ const Routes = () => {
       <Route path="/dashboard">
         <Dashboard autentication={autentication} setAutentication={setAutentication}/>
       </Route>
+      <Route render={() => <Redirect to="/" />} />
     </Switch>
   );
 };

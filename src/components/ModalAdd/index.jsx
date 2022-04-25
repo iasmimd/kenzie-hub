@@ -11,7 +11,7 @@ import Select from "../Select";
 import toast, { Toaster } from "react-hot-toast";
 import { Content } from "../ModalTech/styles";
 
-const ModalAdd = ({ onOpenModal, onCloseModal }) => {
+const ModalAdd = ({ onOpenModal, onCloseModal}) => {
   const [tech, setTech] = useState([]);
 
   const schema = yup.object().shape({
@@ -36,10 +36,6 @@ const ModalAdd = ({ onOpenModal, onCloseModal }) => {
       })
       .then((res) => {
         setTech([...tech, res.data]);
-        localStorage.setItem(
-          "@KenzieHub:tech",
-          JSON.stringify([...tech, res.data])
-        )
           toast.success("Adicionado com sucesso")
       })
       .catch((err) => {
